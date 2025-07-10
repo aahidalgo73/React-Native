@@ -5,6 +5,7 @@ import { Pressable } from 'react-native';
 import { useEffect, useState } from 'react';
 import { getPersonajes } from './lib/rickyMorty';
 import Logo from './components/Logo';
+import { CharacterCard } from './components/CharacterCard' ;
 
 export default function App() {
 
@@ -25,16 +26,8 @@ export default function App() {
       <StatusBar style = 'light'/>
       <Logo style = {styles.logo}/>
       <ScrollView>
-      { personajes.map((character) => (
-        <View key = {character.id}>
-            <Image style = {styles.image} source = {{ uri: character.image}} />
-            <Text style = {styles.title}> {character.name}</Text>
-            <Text style = {styles.species}> {character.species}</Text>
-            <Text style = {styles.status}> {character.status}</Text>
-            <Text style = {styles.gender}> {character.gender}</Text>           
-
-        </View>
-      
+      { personajes.map((character) => (        
+      <CharacterCard character = {character} />
       )) }
       </ScrollView>
     </View>
