@@ -1,8 +1,9 @@
 
-import { ScrollView } from 'react-native';
+import { ActivityIndicator, ScrollView } from 'react-native';
 import { useEffect, useState } from 'react';
 import { getPersonajes } from '../lib/rickyMorty';
 import { CharacterCard } from './CharacterCard';
+import { FlatList } from 'react-native-web';
 
 
 export function Main() {
@@ -21,11 +22,23 @@ export function Main() {
    
 
     return (
-<ScrollView>
-      { personajes.map((character) => (        
-      <CharacterCard character = {character} 
-      key = {character.id}/>
-      )) }
-    </ScrollView>            
-    ); 
+        <>
+    { personajes.length === 0 ? (
+        <ActivityIndicator size={"large"}/>
+    ): (
+    
+    <FlatList 
+        data = {personajes}
+         keyExtractor={(item) => item.id.toString()         }   
+         renderItem={
+            ({item,index}) => (
+                <CharacterCard character = {item} index = {index} />
+            )
+         } >
+            </FlatList>
+    
+    )         
+}
+</>
+    );
 }
